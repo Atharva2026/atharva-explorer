@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* XP Luna Theme Colors */
+    --background: 40 24% 92%; /* ECE9D8 - Classic XP grey */
+    --foreground: 0 0% 13%; /* Dark text */
+    
+    --card: 40 24% 94%;
+    --card-foreground: 0 0% 13%;
+    
+    --popover: 40 24% 96%;
+    --popover-foreground: 0 0% 13%;
+    
+    /* XP Blue - Title bars and primary actions */
+    --primary: 210 100% 42%; /* 0078D7 */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Window background */
+    --secondary: 40 20% 88%; /* D4D0C8 */
+    --secondary-foreground: 0 0% 13%;
+    
+    --muted: 40 15% 85%;
+    --muted-foreground: 0 0% 40%;
+    
+    /* XP Accent Blue */
+    --accent: 220 85% 45%; /* 245EDC */
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 40 15% 75%;
+    --input: 40 20% 88%;
+    --ring: 210 100% 42%;
+    
+    --radius: 0.25rem;
+    
+    /* XP Custom tokens */
+    --xp-title-start: 220 85% 45%; /* Title bar gradient start */
+    --xp-title-end: 210 100% 42%; /* Title bar gradient end */
+    --xp-link: 210 100% 40%; /* Classic blue link */
+    --xp-link-visited: 280 50% 40%;
+    --xp-window-border: 40 25% 70%;
+    --xp-button-face: 40 20% 88%;
+    --xp-button-highlight: 0 0% 100%;
+    --xp-button-shadow: 40 15% 55%;
+    --xp-taskbar: 220 85% 45%;
+    --xp-start-green: 120 60% 35%;
+    
+    /* Sidebar */
+    --sidebar-background: 40 24% 92%;
+    --sidebar-foreground: 0 0% 13%;
+    --sidebar-primary: 210 100% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 85% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 40 15% 75%;
+    --sidebar-ring: 210 100% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'VT323', monospace;
+  }
+}
+
+@layer components {
+  /* XP Window Chrome */
+  .xp-window {
+    @apply bg-secondary border-2 shadow-lg;
+    border-color: hsl(var(--xp-window-border));
+    box-shadow: 
+      2px 2px 0 0 hsl(var(--xp-button-shadow)),
+      inset 1px 1px 0 0 hsl(var(--xp-button-highlight));
+  }
+  
+  .xp-title-bar {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--xp-title-start)) 0%,
+      hsl(var(--xp-title-end)) 100%
+    );
+    @apply px-2 py-1 flex items-center justify-between text-white;
+  }
+  
+  .xp-title-bar-inactive {
+    background: linear-gradient(
+      180deg,
+      hsl(40 15% 65%) 0%,
+      hsl(40 15% 55%) 100%
+    );
+  }
+  
+  /* XP 3D Button */
+  .xp-button {
+    @apply px-4 py-1 text-sm font-medium;
+    background: hsl(var(--xp-button-face));
+    border: 2px solid;
+    border-color: hsl(var(--xp-button-highlight)) hsl(var(--xp-button-shadow)) hsl(var(--xp-button-shadow)) hsl(var(--xp-button-highlight));
+    box-shadow: 1px 1px 0 0 hsl(var(--xp-button-shadow));
+  }
+  
+  .xp-button:hover {
+    background: hsl(40 25% 92%);
+  }
+  
+  .xp-button:active {
+    border-color: hsl(var(--xp-button-shadow)) hsl(var(--xp-button-highlight)) hsl(var(--xp-button-highlight)) hsl(var(--xp-button-shadow));
+    box-shadow: inset 1px 1px 2px hsl(var(--xp-button-shadow));
+  }
+  
+  .xp-button-primary {
+    @apply xp-button;
+    background: linear-gradient(180deg, hsl(210 100% 50%) 0%, hsl(210 100% 42%) 100%);
+    @apply text-white;
+  }
+  
+  .xp-button-primary:hover {
+    background: linear-gradient(180deg, hsl(210 100% 55%) 0%, hsl(210 100% 47%) 100%);
+  }
+  
+  /* XP Input Field */
+  .xp-input {
+    @apply px-2 py-1 bg-white border-2;
+    border-color: hsl(var(--xp-button-shadow)) hsl(var(--xp-button-highlight)) hsl(var(--xp-button-highlight)) hsl(var(--xp-button-shadow));
+    box-shadow: inset 1px 1px 2px hsl(var(--muted));
+  }
+  
+  .xp-input:focus {
+    @apply outline-none ring-2 ring-primary;
+  }
+  
+  /* XP Link */
+  .xp-link {
+    color: hsl(var(--xp-link));
+    @apply underline hover:text-primary cursor-pointer;
+  }
+  
+  .xp-link:visited {
+    color: hsl(var(--xp-link-visited));
+  }
+  
+  /* XP Taskbar */
+  .xp-taskbar {
+    background: linear-gradient(
+      180deg,
+      hsl(220 85% 50%) 0%,
+      hsl(220 85% 40%) 50%,
+      hsl(220 85% 35%) 100%
+    );
+    @apply border-t-2;
+    border-color: hsl(220 85% 55%);
+  }
+  
+  /* Start Button */
+  .xp-start-button {
+    background: linear-gradient(
+      180deg,
+      hsl(120 60% 45%) 0%,
+      hsl(120 60% 35%) 50%,
+      hsl(120 60% 25%) 100%
+    );
+    @apply text-white font-bold px-3 py-1 rounded-r-lg;
+    border: 1px solid;
+    border-color: hsl(120 60% 50%) hsl(120 60% 20%) hsl(120 60% 20%) hsl(120 60% 50%);
+  }
+  
+  /* Textured background */
+  .xp-desktop-bg {
+    background: linear-gradient(
+      180deg,
+      hsl(200, 80%, 60%) 0%,
+      hsl(200, 70%, 70%) 25%,
+      hsl(120, 45%, 55%) 50%,
+      hsl(100, 45%, 45%) 100%
+    );
+  }
+  
+  /* Typewriter animation */
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: hsl(var(--foreground)); }
+  }
+  
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typewriter 0.5s steps(20) forwards;
+  }
+  
+  /* Window control buttons */
+  .xp-control-btn {
+    @apply w-5 h-5 flex items-center justify-center text-xs font-bold rounded-sm;
+    background: linear-gradient(180deg, hsl(40 25% 95%) 0%, hsl(40 20% 85%) 100%);
+    border: 1px solid;
+    border-color: hsl(0 0% 100%) hsl(40 15% 60%) hsl(40 15% 60%) hsl(0 0% 100%);
+  }
+  
+  .xp-control-btn:hover {
+    background: linear-gradient(180deg, hsl(40 30% 98%) 0%, hsl(40 25% 90%) 100%);
+  }
+  
+  .xp-control-close {
+    background: linear-gradient(180deg, hsl(0 70% 55%) 0%, hsl(0 70% 45%) 100%);
+    @apply text-white;
+    border-color: hsl(0 70% 65%) hsl(0 70% 35%) hsl(0 70% 35%) hsl(0 70% 65%);
+  }
+  
+  .xp-control-close:hover {
+    background: linear-gradient(180deg, hsl(0 75% 60%) 0%, hsl(0 75% 50%) 100%);
+  }
+}
+
+@layer utilities {
+  .font-retro {
+    font-family: 'VT323', monospace;
+  }
+  
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
