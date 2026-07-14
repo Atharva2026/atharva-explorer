@@ -46,9 +46,10 @@ export function AboutWindow({ onClose, onMinimize, isActive }: AboutWindowProps)
         
         <div className="mt-6 pt-4 border-t border-muted">
           <p className="text-muted-foreground text-xs">
-            📧 atharva@example.com<br />
-            🔗 github.com/atharva<br />
-            🌐 atharva.dev
+            📧 <a href="mailto:shahatharva20@gmail.com" className="text-blue-600 hover:underline">shahatharva20@gmail.com</a><br />
+            🔗 <a href="https://github.com/Atharva2026" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">github.com/Atharva2026</a><br />
+            🔗 <a href="https://www.linkedin.com/in/atharva-shah-915a86324/" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">linkedin.com/in/atharva-shah-915a86324</a><br />
+            🌐 <a href="https://atharva-explorer.vercel.app" target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">atharva-explorer.vercel.app</a>
           </p>
         </div>
         

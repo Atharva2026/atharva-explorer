@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Volume2, VolumeX, Globe } from 'lucide-react';
 import { StartMenu } from './StartMenu';
 
 interface TaskbarWindow {
@@ -14,6 +15,11 @@ interface TaskbarProps {
   onWindowClick: (id: string) => void;
   onStartMenuAction?: (action: string) => void;
   userName?: string;
+  isAudioOn: boolean;
+  onToggleAudio: () => void;
+  onNetworkClick: () => void;
+  isClippyActive: boolean;
+  onToggleClippy: () => void;
 }
 
 export function Taskbar({ 
@@ -21,7 +27,12 @@ export function Taskbar({
   activeWindowId, 
   onWindowClick, 
   onStartMenuAction,
-  userName = "Atharva"
+  userName = "Atharva",
+  isAudioOn,
+  onToggleAudio,
+  onNetworkClick,
+  isClippyActive,
+  onToggleClippy
 }: TaskbarProps) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -123,17 +134,46 @@ export function Taskbar({
         
         {/* System Tray */}
         <div 
-          className="flex items-center h-full px-3 gap-2"
+          className="flex items-center h-full px-2 gap-2 select-none relative"
           style={{
-            background: 'linear-gradient(180deg, hsl(220, 70%, 42%) 0%, hsl(220, 80%, 32%) 100%)',
-            borderLeft: '1px solid hsl(220, 60%, 50%)',
+            background: 'linear-gradient(180deg, #0c8df6 0%, #005edd 100%)',
+            borderLeft: '1px solid #1059b8',
+            boxShadow: 'inset 1px 0 0 #3182eb',
           }}
         >
-          {/* Tray icons placeholder */}
-          <div className="flex items-center gap-1">
-            <div className="w-4 h-4 bg-white/20 rounded-sm" />
+          {/* Tray Icons */}
+          <div className="flex items-center gap-2 pr-1">
+            {/* Network Icon */}
+            <button 
+              onClick={onNetworkClick}
+              className="p-0.5 rounded hover:bg-white/10 text-white active:scale-95 transition-transform"
+              title="Local Area Connection - Click for details"
+            >
+              <Globe className="w-3.5 h-3.5" />
+            </button>
+
+            {/* Clippy Toggle Icon */}
+            <button 
+              onClick={onToggleClippy}
+              className={`p-0.5 rounded hover:bg-white/10 active:scale-95 transition-transform ${
+                isClippyActive ? 'text-green-300' : 'text-gray-400'
+              }`}
+              title={isClippyActive ? "Hide Clippy Assistant" : "Show Clippy Assistant (bring back)"}
+            >
+              <span className="text-[11px] block leading-none select-none">📎</span>
+            </button>
+
+            {/* Audio Toggle Icon */}
+            <button 
+              onClick={onToggleAudio}
+              className="p-0.5 rounded hover:bg-white/10 text-white active:scale-95 transition-transform"
+              title={isAudioOn ? "Mute sounds" : "Unmute sounds (Synthesized Web Audio API)"}
+            >
+              {isAudioOn ? <Volume2 className="w-3.5 h-3.5 text-green-300" /> : <VolumeX className="w-3.5 h-3.5 text-red-300" />}
+            </button>
           </div>
-          <span className="text-white text-xs font-sans" style={{ textShadow: '0 1px 1px rgba(0,0,0,0.3)' }}>
+
+          <span className="text-white text-[11px] font-sans pr-1" style={{ textShadow: '0 1px 1px rgba(0,0,0,0.3)' }}>
             {formattedTime}
           </span>
         </div>

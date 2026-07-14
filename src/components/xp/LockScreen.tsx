@@ -4,9 +4,10 @@ import { User, Power } from 'lucide-react';
 
 interface LockScreenProps {
   onLogin: () => void;
+  userName?: string;
 }
 
-export function LockScreen({ onLogin }: LockScreenProps) {
+export function LockScreen({ onLogin, userName = 'Atharva' }: LockScreenProps) {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleLogin = () => {
@@ -95,7 +96,7 @@ export function LockScreen({ onLogin }: LockScreenProps) {
             {/* User name */}
             <div className="text-left">
               <h2 className="text-white text-xl font-sans font-medium group-hover:text-white/90">
-                Atharva
+                {userName}
               </h2>
               {isLoggingIn && (
                 <motion.p

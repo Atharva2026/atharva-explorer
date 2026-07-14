@@ -9,10 +9,11 @@ interface SearchWindowProps {
   onMinimize: () => void;
   onOpenProject: (project: Project) => void;
   onOpenSkill: (skill: Skill) => void;
+  onOpenAbout: () => void;
   isActive?: boolean;
 }
 
-export function SearchWindow({ onClose, onMinimize, onOpenProject, onOpenSkill, isActive }: SearchWindowProps) {
+export function SearchWindow({ onClose, onMinimize, onOpenProject, onOpenSkill, onOpenAbout, isActive }: SearchWindowProps) {
   const [inputValue, setInputValue] = useState('');
   const { results, search, query } = useSearch();
 
@@ -26,6 +27,8 @@ export function SearchWindow({ onClose, onMinimize, onOpenProject, onOpenSkill, 
       onOpenProject(result.item as Project);
     } else if (result.type === 'skill') {
       onOpenSkill(result.item as Skill);
+    } else if (result.type === 'about') {
+      onOpenAbout();
     }
   };
 
